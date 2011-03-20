@@ -12,7 +12,7 @@ public class XmlaDriverConnectDemo {
 
         // Load the driver
         Class.forName("org.olap4j.driver.xmla.XmlaOlap4jDriver");
-        
+
         // Connect
         final Connection connection =
             DriverManager.getConnection(
@@ -36,18 +36,18 @@ public class XmlaDriverConnectDemo {
                 // XMLA is over HTTP, so BASIC authentication is used.
                 null,
                 null);
-        
+
         // We are dealing with an olap connection. we must unwrap it.
         final OlapConnection olapConnection = connection.unwrap(OlapConnection.class);
 
         // Check if it's all groovy
-        ResultSet databases = olapConnection.getMetaData().getDatasources();
+        ResultSet databases = olapConnection.getMetaData().getDatabases();
         databases.first();
         System.out.println(
                 olapConnection.getMetaData().getDriverName()
                 + " -> "
                 + databases.getString(1));
-        
+
         // Done
         connection.close();
     }

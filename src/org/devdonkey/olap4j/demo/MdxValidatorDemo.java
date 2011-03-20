@@ -17,8 +17,6 @@ public class MdxValidatorDemo {
         final Connection connection =
             DriverManager.getConnection(
             "jdbc:mondrian:"                                                            // Driver ident
-            + "JdbcDrivers=com.mysql.jdbc.Driver;"                                      // Relational driver
-//            + "Jdbc=jdbc:mysql://localhost/foodmart?user=foodmart&password=foodmart;"   // Relational DB
             + "Jdbc=jdbc:hsqldb:file:foodmart/foodmart;"                                // Relational DB
             + "Catalog=file:foodmart/FoodMart.xml;");                                   // Catalog
         

@@ -14,54 +14,41 @@ import org.olap4j.layout.RectangularCellSetFormatter;
 public class ScenarioDemo {
 
     public static void main(String[] args) throws Exception {
-        
+
         RectangularCellSetFormatter formatter =
             new RectangularCellSetFormatter(false);
         PrintWriter writer = new PrintWriter(System.out);
-        
-        
+
         // Load the driver
         Class.forName("mondrian.olap4j.MondrianOlap4jDriver");
-        
+
         // Connect
         final Connection connection =
             DriverManager.getConnection(
             "jdbc:mondrian:"                                                            // Driver ident
-            + "JdbcDrivers=com.mysql.jdbc.Driver;"                                      // Relational driver
-//            + "Jdbc=jdbc:mysql://localhost/foodmart?user=foodmart&password=foodmart;"   // Relational DB
             + "Jdbc=jdbc:hsqldb:file:foodmart/foodmart;"                                // Relational DB
             + "Catalog=file:foodmart/FoodMart.xml;");                                   // Catalog
-        
+
         // We are dealing with an olap connection. we must unwrap it.
         final OlapConnection olapConnection = connection.unwrap(OlapConnection.class);
-        
-        
-        
+
         // Create a scenario
         Scenario scenario = olapConnection.createScenario();
 
         // Activate it.
         olapConnection.setScenario(scenario);
-        
-        
-        
-        
+
         // Build a query against that scenario
         final String query = "SELECT { [Product].[All Products].[Drink].[Beverages].Children } ON COLUMNS, "
             + "{ [Store].[All Stores].[USA], [Store].[All Stores].[USA].Children } ON ROWS FROM [Sales] WHERE ([Time].[1997], "
             + "[Scenario].[" + scenario.getId() + "])";
-    
-        
-        
-        
-        
+
         //  Prepare a statement and execute
         final CellSet cellSetBefore =
             olapConnection
                 .prepareOlapStatement(query)
                     .executeQuery();
-        
-        
+
         // Check the results
         System.out.println("/********************* BEFORE ***********************/");
         formatter.format(cellSetBefore, writer);
@@ -71,10 +58,7 @@ public class ScenarioDemo {
         System.out.println(" ");
         System.out.println(" ");
         System.out.println(" ");
-        
-        
-        
-        
+
         // Change a cell
         cellSetBefore
             .getCell(
@@ -82,21 +66,15 @@ public class ScenarioDemo {
             .setValue(
                 1000000, 
                 AllocationPolicy.EQUAL_ALLOCATION);
-        
-      
-        
-        
+
         //  Prepare a statement and execute
         final CellSet cellSetAfter = olapConnection
             .prepareOlapStatement(query).executeQuery();
-        
-        
-        
+
         // Check the results
         System.out.println("/********************* AFTER ******************************************/");
         formatter.format(cellSetAfter, writer);
         writer.flush();
         System.out.println("/********************* AFTER ******************************************/");
-        
     }
 }
