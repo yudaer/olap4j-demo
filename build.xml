@@ -1,0 +1,30 @@
+<!--
+  == $Id: //open/mondrian/build.xml#234 $
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == Copyright (C) 2001-2003 Kana Software, Inc.
+  == Copyright (C) 2001-2010 Julian Hyde and others
+  == All Rights Reserved.
+  == You must accept the terms of that agreement to use this software.
+  -->
+<project basedir="." name="olap4j-demo" default="resolve" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<import file="subfloor.xml" />
+	<target name="javadoc">
+	</target>
+	<target name="clean">
+	</target>
+	<target name="report" depends="resolve">
+		<ivy:report
+			conf="default" 
+			graph="false"
+			todir="${basedir}"/>
+	</target>
+	<!-- Fixes a bug in subfloor -->
+	<target name="install-pentaho-ant-tasks" depends="install-ivy">
+		<mkdir dir="${pentaho.build.cache.dir}"/>
+		<antcall target="subfloor.install-pentaho-ant-tasks"></antcall>
+	</target>
+</project>
+
+<!-- End build.xml -->
