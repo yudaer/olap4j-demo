@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://ivyrep.jayasoft.org/ivy-doc.xsl"?>
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == Copyright (C) 2010-2011 Luc Boudreau
+  == All Rights Reserved.
+  == You must accept the terms of that agreement to use this software.
+  -->
+<ivy-module
+    version="2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:m="http://ant.apache.org/ivy/maven"
+    xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+  <info organisation="org.devdonkey" module="olap4j-demo" revision="1.1">
+      <license name="EPL" url="http://www.eclipse.org/legal/epl-v10.html"/>
+      <ivyauthor name="Luc Boudreau" />
+      <description homepage="http://http://code.google.com/p/olap4j-demo/">
+          olap4j-demo is a collection of code samples demonstrating olap4j.
+      </description>
+  </info>
+  <configurations>
+    <conf name="default"/>
+    <conf name="test"/>
+  </configurations>
+
+  <publications>
+    <artifact name="${ivy.artifact.id}" type="jar" conf="default" />
+  </publications>
+
+  <dependencies defaultconf="default->default">
+
+    <dependency org="org.olap4j" name="olap4j" rev="1.0.0-SNAPSHOT" />
+    <dependency org="org.olap4j" name="olap4j-xmla" rev="1.0.0-SNAPSHOT" />
+    <dependency org="mdx4j" name="mdx4j" rev="1.0" />
+    <dependency org="pentaho" name="mondrian" rev="3.3-SNAPSHOT" />
+    <dependency org="hsqldb" name="hsqldb" rev="1.8.0.7" />
+
+  </dependencies>
+</ivy-module>
+
+<!-- End ivy.xml -->
